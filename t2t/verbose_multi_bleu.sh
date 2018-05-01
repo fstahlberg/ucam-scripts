@@ -1,0 +1,1 @@
+cat /dev/stdin | perl /data/mifs_scratch/fs439/bin/moses//scripts/generic/multi-bleu-verbose.perl $1 | sed 's/\(e correct[12] [0-9]* [0-9]*\) .*$/\1/' | sed 's/correct[12] [0-9]*/correct11/' | uniq -c | sed 's/\([0-9]\+\) \([0-9]\+\) e \(correct[12][0-9]\+\) \([0-9]\+\)/\2: \4-grams: \1 (type: \3)/' | sed 's/^ *1 \([0-9]\+\)\( .*<=>\)/\1:\2/' | sed 's/^ *//'
