@@ -128,16 +128,14 @@ with open(args.source) as src_reader:
       for src, trg, al in zip(src_reader, trg_reader, al_reader):
         #print("\n SENTENCE %d -------------------------" % sen_idx)
         sen_idx += 1
-        #print(src)
-        #print(trg)
-        #print(al)
         src = src.strip().split()
         trg = trg.strip().split()
         al = map(int, al.strip().split())
         al_links = [(al[i], al[i+1]) for i in xrange(0, len(al), 2)]
-        #print(al_links)
         al_links = preprocess_alignment(al_links, len(trg))
         al_links.sort(key=lambda x: x[1])  # Sort ascending by target pos
+        #print(" ".join(["%s-%s" % a for a in al_links]))
+        #continue
         src2trg = [[] for _ in xrange(len(src))]
         for src_pos, trg_pos in al_links:
           src2trg[src_pos].append(trg_pos)

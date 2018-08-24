@@ -46,7 +46,7 @@ parser.add_argument('-d','--dir', help='s2i: convert to IDs (default), i2s: conv
 parser.add_argument('-m','--wmap', help='Word map to apply (format: see -i parameter)',
                     required=True)
 parser.add_argument('-f','--fields', help='Comma separated list of fields (like for linux command cut)')
-parser.add_argument('-u','--unk_id', default=0, help='UNK id')
+parser.add_argument('-u','--unk_id', default=3, help='UNK id')
 parser.add_argument('-i','--inverse_wmap', help='Use this argument to use word maps with format "id word".'
                     ' Otherwise the format "word id" is assumed', action='store_true')
 parser.add_argument('-t', '--tokenization', default='id', choices=['id', 'eow', 'mixed'],

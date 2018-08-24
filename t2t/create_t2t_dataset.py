@@ -10,7 +10,7 @@ from __future__ import print_function
 import tensorflow as tf
 
 tf.flags.DEFINE_string("inputs_filename", "", "Plain text file with inputs")
-tf.flags.DEFINE_string("targets_filename", "", "Plain text file with targetse")
+tf.flags.DEFINE_string("targets_filename", "", "Plain text file with targets")
 tf.flags.DEFINE_string("output_filename", "", "output filename")
 tf.flags.DEFINE_bool("append_eos", False, "Add EOS")
 FLAGS = tf.flags.FLAGS

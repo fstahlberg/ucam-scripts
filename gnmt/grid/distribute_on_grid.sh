@@ -20,5 +20,5 @@ worker_script=$(dirname $0)/distribute_on_grid_worker.sh
 
 mkdir -p $log_dir
 
-qsub -N distribute-on-grid-worker -l 'not_host=air124,mem_free=12.5G,mem_grab=12.5G,osrel=*' -o $log_dir -e $log_dir -t 1-$num_parts -v total_range=$range,num_parts=$num_parts,cmd_file=$cmd_file $worker_script 
+qsub -N distribute-on-grid-worker -l 'not_host=air124,osrel=12.04' -o $log_dir -e $log_dir -t 1-$num_parts -v total_range=$range,num_parts=$num_parts,cmd_file=$cmd_file $worker_script 
 
