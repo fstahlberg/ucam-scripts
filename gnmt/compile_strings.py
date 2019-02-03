@@ -9,6 +9,8 @@ parser = argparse.ArgumentParser(description='Creates an FST in text format whic
                                  'input [| output] [: weight]')
 parser.add_argument('-e','--allow_eps', help='If false, ignore all lines in STDIN which '
                     'contain at least one "0"', action='store_true', default=False)
+parser.add_argument('-i','--invert_weights', help='If true, multiply all weights by -1', 
+                    action='store_true', default=False)
 args = parser.parse_args()
 
 next_free_id = 1
@@ -16,7 +18,10 @@ for line in sys.stdin:
     parts = line.split(":")
     if len(parts) > 1:
         tapes = parts[0]
-        weight = " %f" % float(parts[1].strip())
+        w = float(parts[1].strip())
+        if args.invert_weights:
+            w *= -1
+        weight = " %f" % w
     else:
         tapes = line
         weight = ""

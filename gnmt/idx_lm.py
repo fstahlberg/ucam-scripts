@@ -1,5 +1,5 @@
 '''
-Replaces words in a arpa LM with their indices
+Replaces words in an arpa LM with their indices
 '''
 
 import logging
@@ -11,7 +11,7 @@ def load_wmap(path, inverse=False):
         d = dict(line.strip().split(None, 1) for line in f)
         if inverse:
             d = dict(zip(d.values(), d.keys()))
-        for (s, i) in [('<s>', '1'), ('</s>', '2')]:
+        for (s, i) in [('</s>', '1'), ('<s>', '2'), ('<unk>', '3')]:
             if not s in d or d[s] != i:
                 logging.warning("%s has not ID %s in word map %s!" % (s, i, path))
         return d
@@ -26,9 +26,11 @@ args = parser.parse_args()
 
 wmap = load_wmap(args.wmap, args.inverse_wmap)
 #unk = '0'
-unk = '999999998'
+#unk = '999999998'
+unk = '3'
 wmap['<s>'] = '<s>'
 wmap['</s>'] = '</s>'
+wmap['<unk>'] = '<unk>'
 
 for line in sys.stdin:
     parts = line.strip().split("\t")

@@ -1,5 +1,8 @@
 # Source this file to set up T2T + SGNMT in grid environment
 
+# Unsetting LD_PRELOAD prevents seg faults when submitted with SGE
+unset LD_PRELOAD
+
 export PATH=/data/mifs_scratch/fs439/bin/tf_anaconda19/bin:$PATH
 source activate tensorflow19
 source /home/mifs/fs439/bin/cuda-9.0_cudnn-7.1/activate.sh 

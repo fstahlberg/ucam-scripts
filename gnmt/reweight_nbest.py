@@ -30,6 +30,15 @@ for line in sys.stdin:
         cur_sens = []
         cur_id = this_id
     feats = parts[6].strip().split()
-    total = sum([weights[i]*float(feats[i*2+1]) for i in xrange(n_feats)])
+    feat_vals = []
+    for feat in feats:
+      try:
+        val = float(feat)
+        feat_vals.append(val)
+      except:
+        pass
+    if len(feat_vals) != n_feats:
+      sys.exit("Number of features does not match weight vector length")
+    total = sum([weights[i]*feat_vals[i] for i in xrange(n_feats)])
     cur_sens.append((total, parts[3], parts[6]))
 print_cur_sens(cur_id, cur_sens)

@@ -64,6 +64,8 @@ def compile_ops(ops):
   return "%s (head: %d)" % (" ".join(compiled), head)
     
 def preprocess_alignment(al_links, trg_len):
+  if not al_links:
+    return al_links
   al_links.sort(key=lambda x: (x[1], -x[0]))  # Sort ascending by target pos
   trg2src = [-1 for _ in xrange(trg_len)]
   for src_pos, trg_pos in al_links:
@@ -139,7 +141,6 @@ with open(args.source) as src_reader:
         src2trg = [[] for _ in xrange(len(src))]
         for src_pos, trg_pos in al_links:
           src2trg[src_pos].append(trg_pos)
-        #print([bla for bla in enumerate(src2trg)])
         ops = generate_operations(src, trg, src2trg)
         print(" ".join(ops))
 

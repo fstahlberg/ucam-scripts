@@ -24,7 +24,7 @@ parser.add_argument('-g','--groups', help='Use this to share predictor weights. 
                     required=True)
 parser.add_argument('-s','--decode_script', help='path to one of the decode_on_grid_cpu*.sh scripts which should be used '
                     'for distributed decoding',
-                    default='../scripts/grid/fast_decode_on_grid_cpu.sh',
+                    default='../scripts/grid/fast_decode_on_grid_cpu19.sh',
                     required=False)
 parser.add_argument('-w','--initial_weights', help='Starting point (Default: 0.5,0.5,0.5,...)',
                     default='',
@@ -33,10 +33,10 @@ parser.add_argument('-m','--memory', help='Memory requirements',
                     default='1.5G',
                     required=False)
 parser.add_argument('-i','--iter', help='Number of iteration spent to optimize a single dimension',
-                    default=10, type=int,
+                    default=2, type=int,
                     required=False)
 parser.add_argument('-e','--epochs', help='Number of swipes through the dimensions',
-                    default=10, type=int,
+                    default=100, type=int,
                     required=False)
 args = parser.parse_args()
 
@@ -60,7 +60,7 @@ def objective(point):
     done_file = "%s/DONE" % sgnmt_dir
     try:
         shutil.rmtree(sgnmt_dir)
-    except:
+    except OSError:
         pass
     os.mkdir(sgnmt_dir)
     shutil.copyfile(args.config_file, config_file)
@@ -163,4 +163,4 @@ for _ in xrange(args.epochs):
                     break
             vals.sort(key=itemgetter(1))
         
-print cur_point
+print(vals[0])
