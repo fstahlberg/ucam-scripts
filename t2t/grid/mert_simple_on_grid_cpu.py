@@ -38,6 +38,9 @@ parser.add_argument('-i','--iter', help='Number of iteration spent to optimize a
 parser.add_argument('-e','--epochs', help='Number of swipes through the dimensions',
                     default=100, type=int,
                     required=False)
+parser.add_argument('-j','--max_jump', help='If set, lower and upper bounds are not more than this away from the current best point.',
+                    default=-1.0, type=float,
+                    required=False)
 args = parser.parse_args()
 
 
@@ -145,6 +148,9 @@ for _ in xrange(args.epochs):
                     lower_pos = pos - slack
                 if pos > best_pos and pos + slack < upper_pos:
                     upper_pos = pos + slack
+            if args.max_jump > 0.0:
+                lower_pos = max(lower_pos, best_pos - args.max_jump)
+                upper_pos = min(upper_pos, best_pos + args.max_jump)
             test_pos = [lower_pos, upper_pos]
             order = [0, 1]
             if last_dir[dim] > 0:

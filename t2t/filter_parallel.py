@@ -6,9 +6,9 @@ import argparse
 import sys
 
 parser = argparse.ArgumentParser(description='Filters parallel indexed text')
-parser.add_argument('-r','--ratio', help='Max ratio.', default=4.5)
+parser.add_argument('-r','--ratio', help='Max ratio.', default=3.2, type=float)
 parser.add_argument('-u','--unk', help='UNK.', default='3')
-parser.add_argument('-m','--max_length', help='Max length', default=240)
+parser.add_argument('-m','--max_length', help='Max length', default=240, type=int)
 args = parser.parse_args()
 
 for line in sys.stdin:

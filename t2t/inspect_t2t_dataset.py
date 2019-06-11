@@ -40,7 +40,7 @@ from tensor2tensor.data_generators import text_encoder
 
 import tensorflow as tf
 
-tf.flags.DEFINE_string("output_encoder", "subword",
+tf.flags.DEFINE_string("output_encoder", "int",
                        "'subword': SubwordTextEncoder\n"
                        "'token': TokenTextEncoder\n"
                        "'byte': ByteTextEncoder\n"

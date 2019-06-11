@@ -35,7 +35,9 @@ echo "Decode "$(cat $src_test | wc -l)" sentences using $config_file with $num_p
 cat $src_test | awk '{print NR" "NF}' | sort -g -k2 -r | cut -d' ' -f1 > $output_dir/remaining_ids
 
 
-ID=$(qsub -N sgnmt-worker -l "mem_free=$mem_required,mem_grab=$mem_required,osrel=14.04" -o $output_dir/logs -e $output_dir/logs -t 1-$num_parts -v config_file=$config_file,output_dir=$output_dir $worker_script | awk '{print $3}' | sed 's:\..*::')
+ID=$(qsub -N sgnmt-worker -l "mem_free=$mem_required,mem_grab=$mem_required,osrel=*,not_host=(air093|air094|air095|air096|air097|air098|air100|air101|air102|air106)" -o $output_dir/logs -e $output_dir/logs -t 1-$num_parts -v config_file=$config_file,output_dir=$output_dir $worker_script | awk '{print $3}' | sed 's:\..*::')
+#ID=$(qsub -N sgnmt-worker -l "mem_free=$mem_required,mem_grab=$mem_required,osrel=*,not_host=(air093|air094|air095|air096|air097|air098|air100|air101|air102)" -o $output_dir/logs -e $output_dir/logs -t 1-$num_parts -v config_file=$config_file,output_dir=$output_dir $worker_script | awk '{print $3}' | sed 's:\..*::')
+#ID=$(qsub -N sgnmt-worker -l "mem_free=$mem_required,mem_grab=$mem_required,osrel=14.04" -o $output_dir/logs -e $output_dir/logs -t 1-$num_parts -v config_file=$config_file,output_dir=$output_dir $worker_script | awk '{print $3}' | sed 's:\..*::')
 HT="-hold_jid $ID"
 
 # Start combination job
