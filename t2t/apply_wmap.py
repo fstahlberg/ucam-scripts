@@ -1,0 +1,1 @@
+/data/mifs_scratch/fs439/exp/gnmt/scripts/apply_wmap.py
